@@ -9,6 +9,7 @@ function generatePassword() {
   );
   console.log(count);
 
+  // alerts
   if (count < 8 || count > 128 || !count) {
     alert("Pick a number between 8 and 128!.");
     alert("Type a number.");
@@ -16,12 +17,17 @@ function generatePassword() {
   }
 
   // options for password
-  var letters = "abcdefghijklmnopqrstuvwxyz";
+  var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
   var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXY";
   var numbers = "1234567890";
   var special = "!@#$%^&*()<>?:{}+|";
 
-  var pool = letters;
+  var pool = "";
+
+  // Adds lowercase letters into my password
+  if (confirm("Do you want lowercase letters in your password?")) {
+    pool += lowercaseLetters;
+  }
 
   // Adds uppercase letters into my password
   if (confirm("Do you want uppercase letters in your password?")) {
@@ -38,29 +44,20 @@ function generatePassword() {
     pool += numbers;
   }
 
+  // Return if character type wasnt defined
+  if (pool === "") {
+    alert("Select one character type");
+    return "Try Again";
+  }
+
   var genPassword = "";
-
+  // Create a random password from the pool
   for (var i = 0; i < count; i++) {
-    var random = Math.floor(Math.random() * letters.length);
-    genPassword += letters[random];
+    var randomIdx = Math.floor(Math.random() * pool.length);
+    var randomChar = pool[randomIdx];
+    genPassword += randomChar;
+    console.log(genPassword);
   }
-
-  for (var i = 0; i < count; i++) {
-    var random = Math.floor(Math.random() * numbers.length);
-    genPassword += numbers[random];
-  }
-
-  for (var i = 0; i < count; i++) {
-    var random = Math.floor(Math.random() * uppercase.length);
-    genPassword += uppercase[random];
-  }
-
-  for (var i = 0; i < count; i++) {
-    var random = Math.floor(Math.random() * special.length);
-    genPassword += special[random];
-  }
-
-  console.log(genPassword);
 
   return genPassword;
 }
