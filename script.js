@@ -1,8 +1,19 @@
 // Assignment Code
+
+// Add event listener to generate button
 var generateBtn = document.querySelector("#generate");
+generateBtn.addEventListener("click", writePassword);
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+}
 
 function generatePassword() {
-  var count = Number(
+  var count = parseInt(
     prompt(
       "Please enter the amount of characters you would like in your password."
     )
@@ -10,13 +21,16 @@ function generatePassword() {
   console.log(count);
 
   // alerts
-  if (count < 8 || count > 128 || !count) {
+  if (count < 8 || count > 128) {
     alert("Pick a number between 8 and 128!.");
-    alert("Type a number.");
+    ("Type a number.");
+    return "";
+  } else if (typeof count === NaN || !count) {
+    alert("Please enter a number");
     return "";
   }
 
-  // options for password
+  // options for pas6sword
   var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
   var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXY";
   var numbers = "1234567890";
@@ -61,14 +75,3 @@ function generatePassword() {
 
   return genPassword;
 }
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
